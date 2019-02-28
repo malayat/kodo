@@ -1,6 +1,5 @@
 package solmedia.ec.kodo.controller
 
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Scope
 import org.springframework.stereotype.Component
 import solmedia.ec.kodo.model.Todo
@@ -8,10 +7,7 @@ import solmedia.ec.kodo.service.TodoService
 
 @Scope(value = "session")
 @Component(value = "todoController")
-class TodoController {
-
-    @Autowired
-    lateinit var todoService: TodoService
+class TodoController(private val todoService: TodoService) {
 
     var todoNew = Todo()
 
@@ -32,5 +28,4 @@ class TodoController {
         val copyTodo = todo.copy(priority = priority)
         updateTodo(todo, copyTodo)
     }
-
 }

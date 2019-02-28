@@ -1,8 +1,20 @@
 package solmedia.ec.kodo.model
 
+import javax.persistence.Column
+import javax.persistence.Entity
+import javax.persistence.GeneratedValue
+import javax.persistence.Id
+import javax.validation.constraints.NotBlank
+
+@Entity
 data class Todo(
-    var message: String? = "",
-    var priority: Int = 10
+    @Column(name = "MESSAGE")
+    @NotBlank
+    var message: String? = null,
+
+    var priority: Int = 10,
+
+    @Id @GeneratedValue val id: Long? = null
 ) {
     val style: String
         get() = when (message?.length) {

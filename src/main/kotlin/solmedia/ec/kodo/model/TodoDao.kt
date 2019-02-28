@@ -6,28 +6,24 @@ import org.springframework.stereotype.Component
 class TodoDao : Dao<Todo> {
 
     val todoList: MutableList<Todo?> = mutableListOf(
-        Todo("""
+        Todo(
+            """
             Type a "to do", change its priority by clicking
             on the number shown above, notes will be automatically
             sorted by their priority. If the number is lower,
             higher is your priority.
-        """, 5)
+        """, 5
+        )
     )
 
-    override fun getAll(): Collection<Todo> {
-        return todoList.filterNotNull().sortedBy { it.priority }
+    override fun getAll() = todoList.filterNotNull().sortedBy { it.priority }
+
+    override fun save(entity: Todo) = todoList.add(entity)
+
+    override fun update(oldEntity: Todo, newEntity: Todo) {
+        val item = todoList.indexOf(oldEntity)
+        todoList[item] = newEntity
     }
 
-    override fun save(t: Todo) {
-        todoList.add(t)
-    }
-
-    override fun update(oldTodo: Todo, newTodo: Todo) {
-        val item = todoList.indexOf(oldTodo)
-        todoList[item] = newTodo
-    }
-
-    override fun delete(t: Todo) {
-        todoList.remove(t)
-    }
+    override fun delete(entity: Todo) = todoList.remove(entity)
 }

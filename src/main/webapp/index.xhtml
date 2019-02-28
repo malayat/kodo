@@ -11,10 +11,10 @@
     <h:body>
         <div id="wrapper">
             <h:form id="todoForm" styleClass="addnote open">
-                <h:inputTextarea required="true"
+                <h:inputTextarea
                         id="txaMessage" styleClass="addnote-title"
                         value="#{todoController.todoNew.message}"
-                        a:placeholder="Add to do"/>
+                        a:placeholder="Add to do" required="true"/>
                 <div class="addnote-toolbar">
                     <h:commandButton value="Guardar" action="#{todoController.saveTodo}" styleClass="add-button">
                         <f:ajax execute="@form" render="gridTodos txaMessage"/>
@@ -28,7 +28,7 @@
                         <div class="note">
                             <div class="note-text">
                                 <h:commandLink actionListener="#{todoController.changePriority(item)}">
-                                <strong>#{item.priority}</strong>
+                                    <strong>#{item.priority}</strong>
                                     <f:ajax render="gridTodos"/>
                                 </h:commandLink>
                                 <p class="#{item.style}">
